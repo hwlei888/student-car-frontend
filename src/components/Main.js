@@ -8,6 +8,7 @@ import '../App.css';
 
 import Home from './Home';
 import Student from './Student';
+import Search from './Search';
 
 function Main() {
 
@@ -23,6 +24,8 @@ function Main() {
                     <Link to='/classroom/A'>Class A</Link>
                     <Link to='/classroom/B'>Class B</Link>
                 </nav>
+
+                <Search />
 
                 <Routes>
 

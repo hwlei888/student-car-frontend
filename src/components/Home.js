@@ -21,6 +21,7 @@ function Home(){
 
     }, []);
 
+    // get cars json data from server
     const findAllCars = async () => {
         try{
 
@@ -45,6 +46,7 @@ function Home(){
     }
 
 
+    // get car related student name
     const showStudentName = (item) => {
 
         setLinkStudent(item.student);
@@ -52,6 +54,7 @@ function Home(){
     } // showStudentName()
 
 
+    // if click the leave button, student leave
     const studentLeave = async(item) => {
 
         const res = await axios.patch(RAILS_BASE_URL + `students/${item.id}`, {student: {is_leave: true}});
@@ -66,11 +69,10 @@ function Home(){
             [item.id]: false
         });
 
-
-
     } // studentLeave()
 
 
+    // if clikc the still here button, student not leave
     const studentNotLeave = async(item) => {
 
         const res = await axios.patch(RAILS_BASE_URL + `students/${item.id}`, {student: {is_leave: false}});
