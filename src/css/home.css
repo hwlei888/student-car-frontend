@@ -1,0 +1,23 @@
+
+div{
+    /* border: red solid 1px; */
+}
+
+.home-container{
+    display: grid;
+    grid-template-columns:30% 70%;
+}
+
+.classA-container{
+    height: 300px;
+    border: red solid 1px;
+}
+
+.classB-container{
+    height: 300px;
+    border: red solid 1px;
+}
+
+
+
+
