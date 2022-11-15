@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import '../css/home.css'
@@ -9,6 +10,9 @@ const RAILS_BASE_URL = 'http://localhost:3000/'
 
 function Home(){
 
+    const searchCar = useSelector(state => state.searchCar);
+    console.log('Home-function-searchCar', searchCar); // test
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cars,setCars] = useState(null);
@@ -16,10 +20,16 @@ function Home(){
     const [message, setMessage] = useState({});
     const [isHere, setIsHere] = useState({});
 
+
+
+
     useEffect(() =>{
         findAllCars();
 
+        console.log('Home-redux', searchCar);
+        
     }, []);
+
 
     // get cars json data from server
     const findAllCars = async () => {
@@ -39,11 +49,17 @@ function Home(){
             setLoading(false);
             setError(err);
         }
-    } //findAllCars()
+    }; //findAllCars()
 
     if(error){
         return <p>Error Loading from API</p>
-    }
+    };
+
+    // const showSearchStudentName = (item) => {
+
+    //     setLinkStudent(item.student);
+
+    // }; // showSearchStudentName()
 
 
     // get car related student name
@@ -51,7 +67,7 @@ function Home(){
 
         setLinkStudent(item.student);
 
-    } // showStudentName()
+    }; // showStudentName()
 
 
     // if click the leave button, student leave
@@ -69,7 +85,7 @@ function Home(){
             [item.id]: false
         });
 
-    } // studentLeave()
+    }; // studentLeave()
 
 
     // if clikc the still here button, student not leave

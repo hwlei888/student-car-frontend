@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -12,6 +12,8 @@ const REACT_BASE_URL = 'http://localhost:3001/'
 
 
 function Search(){
+
+    const dispatch = useDispatch();
 
     const [searchText, setSearchText] = useState(null);
     const [searchResults, setSearchRestuls] = useState(null);
@@ -48,12 +50,13 @@ function Search(){
     }
 
     // click Searct result text
-    const textClick = () => {
-        
+    const textClick = (item) => {
+        dispatch({type: 'searchCar/select', payload: item});
+        console.log('Search-textClick', item); // test
+        setSearchText(null);
+        setSearchRestuls(null);
+        setShowSearchResults(false);
     }
-
-
-
 
 
     return(
@@ -97,8 +100,8 @@ function Search(){
                                             action
                                             variant='warning'
                                             className='center'
-                                            href={REACT_BASE_URL}
-                                            onClick={testClick}
+                                            // href={REACT_BASE_URL}
+                                            onClick={() => textClick(rlt)}
                                         >
                                             {rlt.registration}
                                         </ListGroup.Item>
