@@ -15,9 +15,7 @@ function Home(){
     let linkStudent = useSelector(state => state.selectStudent);
     console.log('Home-function-selectStudent', linkStudent); // test
     
-    // change redux linkStudent.is_leave is not enough, 
-    // for a student has many cars
-    // and each car's linkStudent.is_leave cannot modify at one time
+    // isHere and message and is_leave work together to make the logic run better
     const [isHere, setIsHere] = useState({}); 
     const [message, setMessage] = useState({});
 
@@ -121,6 +119,23 @@ function Home(){
         }
 
     }; // StudentsLeaveOrNot()
+
+
+    const LinkStudentIsLeave = ({linkStudentId}) => {
+        let result;
+        if(students){
+            students.forEach(item => {
+                if(item.id === linkStudentId){
+                    if(item.is_leave){
+                        console.log('LinkStudentIsLeave-item', item.is_leave)
+                        result = `${item.name} has left`;
+                    }
+                }
+            })
+        }
+        return result;
+
+    }; // LinkStudentIsLeave
 
 
 
@@ -244,6 +259,7 @@ function Home(){
 
 
                         {
+                            students &&
                             linkStudent &&
                             (
                                 linkStudent.classroom === 'A' &&
@@ -264,13 +280,7 @@ function Home(){
                                         ?
                                         <p>{message[linkStudent.id]}</p>
                                         :
-                                        (
-                                            linkStudent.is_leave &&
-                                            (
-                                                !isHere[linkStudent.id] &&
-                                                <p>{linkStudent.name} has left</p>
-                                            )
-                                        )
+                                        <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
                                     }
                                 </div>
                             )
@@ -308,6 +318,7 @@ function Home(){
 
 
                         {
+                            students &&
                             linkStudent &&
                             linkStudent.classroom === 'B' &&
                             <div>
@@ -327,11 +338,7 @@ function Home(){
                                     ?
                                     <p>{message[linkStudent.id]}</p>
                                     :
-                                    (
-                                        linkStudent.is_leave &&
-                                        !isHere[linkStudent.id] &&
-                                        <p>{linkStudent.name} has left</p>
-                                    )
+                                    <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
                                 }
                             </div>
                         }
