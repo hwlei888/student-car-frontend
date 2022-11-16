@@ -22,11 +22,11 @@ function Search(){
 
 
     const handleSubmit = async (ev) => {
-        console.log('Search-handleSubmit-searchText', searchText); // test
+        // console.log('Search-handleSubmit-searchText', searchText); // test
         ev.preventDefault(); // prevent page refresh after submit
 
         const res = await axios.get(RAILS_BASE_URL + `search/${searchText}`);
-        console.log('Search-handleSubmit-res.data', res.data); // test
+        // console.log('Search-handleSubmit-res.data', res.data); // test
         setSearchRestuls(res.data);
         setShowSearchResults(true);
 
@@ -36,7 +36,7 @@ function Search(){
 
 
     const handleInput = (ev) => {
-        console.log('Search-handleInput', ev.target.value); // test
+        // console.log('Search-handleInput', ev.target.value); // test
         setSearchText(ev.target.value);
 
     }; // handleInput()
@@ -51,8 +51,8 @@ function Search(){
 
     // click Searct result text
     const textClick = (item) => {
-        dispatch({type: 'searchCar/select', payload: item});
-        console.log('Search-textClick', item); // test
+        dispatch({type: 'selectStudent/set', payload: item.student});
+        // console.log('Search-textClick', item); // test
         setSearchText(null);
         setSearchRestuls(null);
         setShowSearchResults(false);

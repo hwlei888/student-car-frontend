@@ -2,16 +2,16 @@
 import {createStore} from 'redux';
 
 const initialState = {
-    searchCar: null,
+    selectStudent: null,
 }
 
 function reducer(state = initialState, action){
 
     switch(action.type){
-        case 'searchCar/select':
+        case 'selectStudent/set':
             return{
                 ...state,
-                searchCar: action.payload,
+                selectStudent: action.payload,
             }
         default:
             console.log('UNMATCHED ACTION:', action);

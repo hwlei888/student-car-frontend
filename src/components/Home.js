@@ -5,75 +5,137 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import '../css/home.css'
+import CarList from './CarList';
+// import Count from './Count';
 
 const RAILS_BASE_URL = 'http://localhost:3000/'
 
 function Home(){
 
-    const searchCar = useSelector(state => state.searchCar);
-    console.log('Home-function-searchCar', searchCar); // test
+    let linkStudent = useSelector(state => state.selectStudent);
+    console.log('Home-function-selectStudent', linkStudent); // test
+    
+    // change redux linkStudent.is_leave is not enough, 
+    // for a student has many cars
+    // and each car's linkStudent.is_leave cannot modify at one time
+    const [isHere, setIsHere] = useState({}); 
+    const [message, setMessage] = useState({});
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [cars,setCars] = useState(null);
-    const [linkStudent, setLinkStudent] = useState(null);
-    const [message, setMessage] = useState({});
-    const [isHere, setIsHere] = useState({});
+    const [students, setStudents] = useState(null);
+    const [leaveCountA, setLeaveCountA] = useState(0);
+    const [leaveCountB, setLeaveCountB] = useState(0);
 
 
 
 
-    useEffect(() =>{
-        findAllCars();
+    useEffect(() => {
+        findAllStudents();
 
-        console.log('Home-redux', searchCar);
-        
     }, []);
 
 
-    // get cars json data from server
-    const findAllCars = async () => {
+    // get all students info from server
+    const findAllStudents = async () => {
         try{
-
             setLoading(true);
 
-            const res = await axios.get(RAILS_BASE_URL + 'cars.json');
-            console.log('Home-findAllCars', res.data);
+            const res = await axios.get(RAILS_BASE_URL + 'students.json');
+            console.log('Home-findAllStudents', res.data); //test
+            localStorage.setItem('allStudents', JSON.stringify(res.data));
 
             setLoading(false);
-            setCars(res.data);
+            setStudents(res.data);
 
         }catch(err){
-            console.error('Error loading All cars', err);
-            
+            console.error('Error loading All cars', err); //test
+
             setLoading(false);
             setError(err);
         }
-    }; //findAllCars()
+    } // findAllStudents()
+
 
     if(error){
         return <p>Error Loading from API</p>
-    };
-
-    // const showSearchStudentName = (item) => {
-
-    //     setLinkStudent(item.student);
-
-    // }; // showSearchStudentName()
+    }
 
 
-    // get car related student name
-    const showStudentName = (item) => {
+    // count the total number of students in each class
+    const StudentsCount = ({item, room}) => {
 
-        setLinkStudent(item.student);
+        let countA = 0;
+        let countB = 0;
+        item.forEach(element => {
+            if(element.classroom === 'A'){
+                countA++;
+            }else{
+                countB++;
+            }
+        });
 
-    }; // showStudentName()
+        if(room === 'A'){
+            return countA;
+        }else{
+            return countB;
+        }
+
+    }; // StudentsCount()
+
+
+
+    // calculate the number of left students and at here
+    const StudentsLeaveOrNot = ({item, room, status}) => {
+
+        let numLeaveA = 0;
+        let numHereA = 0;
+        let numLeaveB = 0;
+        let numHereB = 0;
+        item.forEach(element => {
+            if(element.classroom === 'A'){
+                if(element.is_leave){
+                    numLeaveA++;
+                }else{
+                    numHereA++;
+                }
+            }else{
+                if(element.is_leave){
+                    numLeaveB++;
+                }else{
+                    numHereB++;
+                }
+            }
+        });
+
+        if(room === 'A' && status === 'leave'){
+            console.log('numLeaveA', numLeaveA);
+            console.log('leaveCountA', leaveCountA);
+            return numLeaveA + leaveCountA;
+        }else if(room === 'A' && status === 'here'){
+            return numHereA - leaveCountA;
+        }else if(room === 'B' && status === 'leave'){
+            return numLeaveB + leaveCountB;
+        }else{
+            return numHereB - leaveCountB;
+        }
+
+    }; // StudentsLeaveOrNot()
+
+
+
+
+
+
 
 
     // if click the leave button, student leave
     const studentLeave = async(item) => {
 
         const res = await axios.patch(RAILS_BASE_URL + `students/${item.id}`, {student: {is_leave: true}});
+
+        // in case back from other link and isHere is back to {}
+        // linkStudent.is_leave = true;
         
         setMessage({
             ...message,
@@ -85,13 +147,30 @@ function Home(){
             [item.id]: false
         });
 
+        let countA = leaveCountA;
+        // if empty message, means not duplicate, and class A
+        // means A student leave
+        // if((!isHere[item.id] || isHere[item.id] === true) && !message[item.id] && item.classroom === 'A'){
+        if((isHere[item.id] && item.classroom === 'A') || (!item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
+            countA++;
+        }
+        setLeaveCountA(countA);
+
+        let countB = leaveCountB;
+        if((isHere[item.id] && item.classroom === 'B') || (!item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'B')){
+            countB++;
+        }
+        setLeaveCountB(countB);
+
     }; // studentLeave()
 
 
-    // if clikc the still here button, student not leave
+    // if click the still here button, student not leave
     const studentNotLeave = async(item) => {
 
         const res = await axios.patch(RAILS_BASE_URL + `students/${item.id}`, {student: {is_leave: false}});
+
+        // linkStudent.is_leave = false;
         
         setMessage({
             ...message,
@@ -103,7 +182,21 @@ function Home(){
             [item.id]: true
         });
 
-    } // studentNotLeave()
+        // if isHere = false, and have message, means not duplicate, and class A
+        // means A student leave
+        let countA = leaveCountA;
+        if((message[item.id] && item.classroom === 'A') || (item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
+            countA--;
+        }
+        setLeaveCountA(countA);
+
+        let countB = leaveCountB;
+        if((message[item.id] && item.classroom === 'B') || (item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'B')){
+            countB--;
+        }
+        setLeaveCountB(countB);
+
+    }; // studentNotLeave()
 
 
     return(
@@ -112,59 +205,108 @@ function Home(){
 
             <div className='home-container'>
                 <div className='listOfCars'>
-                    {
-                        loading
-                        ?
-                        <p>Loading results...</p>
-                        :
-                        cars &&
-                        cars.map((item, index) => 
-                            <div key={item.id}>
-                                <div onClick={() => showStudentName(item)}>
-                                    {item.registration}
-                                </div>
-                            </div>
-                        )
-                    }
+
+                    <CarList />
+
                 </div>
+
 
                 <div className='class-container'>
 
+                    {/* Class A */}
                     <div className='classA-container'>
                         <p>Class A</p>
+
+                        <div className='classA-count-container'>
+                            {
+                                students &&
+                                <div>
+                                    <p>
+                                        No.Total: <StudentsCount item={students} room={'A'}/>
+                                    </p>
+
+                                    <p>
+                                        No.Already Left: <StudentsLeaveOrNot item={students} room={'A'} status={'leave'}/>
+                                    </p>
+
+                                    <p>
+                                        No.Still here: <StudentsLeaveOrNot item={students} room={'A'} status={'here'}/>
+                                    </p>
+                                </div>
+                            }
+             
+
+                        </div>
+
+
+
+
+
+
                         {
                             linkStudent &&
-                            linkStudent.classroom === 'A' &&
-                            <div>
-                                <p>{linkStudent.name}</p>
+                            (
+                                linkStudent.classroom === 'A' &&
+                                <div>
+                                    <p>{linkStudent.name}</p>
 
-                                <button onClick={() => {studentLeave(linkStudent)}}>
-                                    Leave
-                                </button>
+                                    <button onClick={() => {studentLeave(linkStudent)}}>
+                                        Leave
+                                    </button>
 
-                                <button onClick={() => {studentNotLeave(linkStudent)}}>
-                                    Still here
-                                </button>
+                                    <button onClick={() => {studentNotLeave(linkStudent)}}>
+                                        Still here
+                                    </button>
 
 
-                                {
-                                    message[linkStudent.id]
-                                    ?
-                                    <p>{message[linkStudent.id]}</p>
-                                    :
-                                    (
-                                        linkStudent.is_leave &&
-                                        !isHere[linkStudent.id] &&
-                                        <p>{linkStudent.name} has left</p>
-                                    )
-                                }
-                            </div>
+                                    {
+                                        message[linkStudent.id]
+                                        ?
+                                        <p>{message[linkStudent.id]}</p>
+                                        :
+                                        (
+                                            linkStudent.is_leave &&
+                                            (
+                                                !isHere[linkStudent.id] &&
+                                                <p>{linkStudent.name} has left</p>
+                                            )
+                                        )
+                                    }
+                                </div>
+                            )
                         }
                     </div>
 
 
+
+                    {/* Class B */}
                     <div className='classB-container'>
                         <p>Class B</p>
+
+                        <div className='classB-count-container'>
+                            {
+                                students &&
+                                <div>
+                                    <p>
+                                        No.Total: <StudentsCount item={students} room={'B'}/>
+                                    </p>
+
+                                    <p>
+                                        No.Already Left: <StudentsLeaveOrNot item={students} room={'B'} status={'leave'}/>
+                                    </p>
+
+                                    <p>
+                                        No.Still here: <StudentsLeaveOrNot item={students} room={'B'} status={'here'}/>
+                                    </p>
+                                </div>
+                            }
+             
+
+                        </div>
+
+
+
+
                         {
                             linkStudent &&
                             linkStudent.classroom === 'B' &&
@@ -195,11 +337,7 @@ function Home(){
                         }
                     </div>
 
-            </div>
-
-
-
-
+                </div>
 
             </div>
 
