@@ -106,16 +106,18 @@ function Home(){
             }
         });
 
-        if(room === 'A' && status === 'leave'){
-            console.log('numLeaveA', numLeaveA);
-            console.log('leaveCountA', leaveCountA);
+        if(room === 'A' && status === 'leave' && (numLeaveA + leaveCountA) >= 0){
+            console.log('numLeaveA', numLeaveA); // test
+            console.log('leaveCountA', leaveCountA); // test
             return numLeaveA + leaveCountA;
-        }else if(room === 'A' && status === 'here'){
+        }else if(room === 'A' && status === 'here' && (numHereA - leaveCountA) >= 0){
             return numHereA - leaveCountA;
-        }else if(room === 'B' && status === 'leave'){
+        }else if(room === 'B' && status === 'leave' && (numLeaveB + leaveCountB) >= 0){
             return numLeaveB + leaveCountB;
         }else{
-            return numHereB - leaveCountB;
+            if((numHereB - leaveCountB) >= 0){
+                return numHereB - leaveCountB;
+            }
         }
 
     }; // StudentsLeaveOrNot()
@@ -126,8 +128,8 @@ function Home(){
         if(students){
             students.forEach(item => {
                 if(item.id === linkStudentId){
-                    if(item.is_leave){
-                        console.log('LinkStudentIsLeave-item', item.is_leave)
+                    if(item.is_leave && !isHere[linkStudentId]){
+                        console.log('LinkStudentIsLeave-item', item.is_leave); // test
                         result = `${item.name} has left`;
                     }
                 }
@@ -178,6 +180,7 @@ function Home(){
         setLeaveCountB(countB);
 
     }; // studentLeave()
+
 
 
     // if click the still here button, student not leave
@@ -320,27 +323,29 @@ function Home(){
                         {
                             students &&
                             linkStudent &&
-                            linkStudent.classroom === 'B' &&
-                            <div>
-                                <p>{linkStudent.name}</p>
+                            (
+                                linkStudent.classroom === 'B' &&
+                                <div>
+                                    <p>{linkStudent.name}</p>
 
-                                <button onClick={() => {studentLeave(linkStudent)}}>
-                                    Leave
-                                </button>
+                                    <button onClick={() => {studentLeave(linkStudent)}}>
+                                        Leave
+                                    </button>
 
-                                <button onClick={() => {studentNotLeave(linkStudent)}}>
-                                    Still here
-                                </button>
+                                    <button onClick={() => {studentNotLeave(linkStudent)}}>
+                                        Still here
+                                    </button>
 
 
-                                {
-                                    message[linkStudent.id]
-                                    ?
-                                    <p>{message[linkStudent.id]}</p>
-                                    :
-                                    <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
-                                }
-                            </div>
+                                    {
+                                        message[linkStudent.id]
+                                        ?
+                                        <p>{message[linkStudent.id]}</p>
+                                        :
+                                        <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
+                                    }
+                                </div>
+                            )
                         }
                     </div>
 
