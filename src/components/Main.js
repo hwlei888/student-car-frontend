@@ -8,7 +8,6 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './Home';
-import Student from './Student';
 import Search from './Search';
 
 function Main() {
@@ -22,8 +21,8 @@ function Main() {
             <Router>
                 <nav>
                     <Link to='/'>Home</Link>
-                    <Link to='/classroom/A'>Class A</Link>
-                    <Link to='/classroom/B'>Class B</Link>
+                    {/* <Link to='/classroom/A'>Class A</Link>
+                    <Link to='/classroom/B'>Class B</Link> */}
                 </nav>
 
                 <Search />
@@ -31,7 +30,7 @@ function Main() {
                 <Routes>
 
                     <Route path='/' element={< Home/>}/>
-                    <Route path='/classroom/:title' element={< Student/>}/>
+                    {/* <Route path='/classroom/:title' element={< Student/>}/> */}
 
 
 

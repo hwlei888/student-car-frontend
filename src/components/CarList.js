@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const RAILS_BASE_URL = 'http://localhost:3000/'
 
-function CarList(){
+function CarList(props){
 
     const dispatch = useDispatch();
 
@@ -64,9 +64,23 @@ function CarList(){
                 cars &&
                 cars.map((item, index) => 
                     <div key={item.id}>
-                        <div onClick={() => showStudentName(item)}>
-                            {item.registration}
-                        </div>
+                        {
+                            props.msg[item.student.id]
+                            ?
+                            <p 
+                            style={{color:'green'}}
+                            onClick={() => showStudentName(item)}
+                            >
+                                {item.registration}
+                            </p>
+                            :
+                            <p 
+                            style={(item.student.is_leave && !props.isHere[item.student.id]) ? {color:'green'}:{color:'black'}}
+                            onClick={() => showStudentName(item)}
+                            >
+                                {item.registration}
+                            </p>
+                        }
                     </div>
                 )
             }
@@ -76,8 +90,6 @@ function CarList(){
 }
 
 export default CarList;
-
-
 
 
 

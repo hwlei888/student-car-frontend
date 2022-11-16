@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import '../css/home.css'
 import CarList from './CarList';
-// import Count from './Count';
+import ClassStudent from './ClassStudents';
 
 const RAILS_BASE_URL = 'http://localhost:3000/'
 
@@ -24,6 +24,8 @@ function Home(){
     const [students, setStudents] = useState(null);
     const [leaveCountA, setLeaveCountA] = useState(0);
     const [leaveCountB, setLeaveCountB] = useState(0);
+    const [showClassA, setShowClassA] = useState(false);
+    const [showClassB, setShowClassB] = useState(false);
 
 
 
@@ -40,8 +42,8 @@ function Home(){
             setLoading(true);
 
             const res = await axios.get(RAILS_BASE_URL + 'students.json');
-            console.log('Home-findAllStudents', res.data); //test
-            localStorage.setItem('allStudents', JSON.stringify(res.data));
+            // console.log('Home-findAllStudents', res.data); //test
+            // localStorage.setItem('allStudents', JSON.stringify(res.data));
 
             setLoading(false);
             setStudents(res.data);
@@ -107,8 +109,8 @@ function Home(){
         });
 
         if(room === 'A' && status === 'leave' && (numLeaveA + leaveCountA) >= 0){
-            console.log('numLeaveA', numLeaveA); // test
-            console.log('leaveCountA', leaveCountA); // test
+            // console.log('numLeaveA', numLeaveA); // test
+            // console.log('leaveCountA', leaveCountA); // test
             return numLeaveA + leaveCountA;
         }else if(room === 'A' && status === 'here' && (numHereA - leaveCountA) >= 0){
             return numHereA - leaveCountA;
@@ -123,13 +125,14 @@ function Home(){
     }; // StudentsLeaveOrNot()
 
 
+    // show the message after page refresh
     const LinkStudentIsLeave = ({linkStudentId}) => {
         let result;
         if(students){
             students.forEach(item => {
                 if(item.id === linkStudentId){
                     if(item.is_leave && !isHere[linkStudentId]){
-                        console.log('LinkStudentIsLeave-item', item.is_leave); // test
+                        // console.log('LinkStudentIsLeave-item', item.is_leave); // test
                         result = `${item.name} has left`;
                     }
                 }
@@ -138,8 +141,6 @@ function Home(){
         return result;
 
     }; // LinkStudentIsLeave
-
-
 
 
 
@@ -167,7 +168,6 @@ function Home(){
         let countA = leaveCountA;
         // if empty message, means not duplicate, and class A
         // means A student leave
-        // if((!isHere[item.id] || isHere[item.id] === true) && !message[item.id] && item.classroom === 'A'){
         if((isHere[item.id] && item.classroom === 'A') || (!item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
             countA++;
         }
@@ -217,14 +217,38 @@ function Home(){
     }; // studentNotLeave()
 
 
+
+    // control to show Class A students or not
+    const showClassAStudents = () => {
+        setShowClassA(true);
+        setShowClassB(false);
+
+    }; // showClassAStudents()
+
+
+    // control to show Class B students or not
+    const showClassBStudents = () => {
+        setShowClassA(false);
+        setShowClassB(true);
+
+    }; // showClassBStudents()
+
+
+
+
+
+
+
     return(
         <div>
-            <h1>Home</h1>
 
             <div className='home-container'>
                 <div className='listOfCars'>
 
-                    <CarList />
+                    <CarList                     
+                    msg={message}
+                    isHere={isHere}
+                    />
 
                 </div>
 
@@ -233,8 +257,12 @@ function Home(){
 
                     {/* Class A */}
                     <div className='classA-container'>
-                        <p>Class A</p>
+                        <div onClick={showClassAStudents}>
+                            Class A
+                        </div>
 
+
+                        {/* Number of students */}
                         <div className='classA-count-container'>
                             {
                                 students &&
@@ -259,8 +287,7 @@ function Home(){
 
 
 
-
-
+                        {/* student info & leave or not button & leave message */}
                         {
                             students &&
                             linkStudent &&
@@ -268,6 +295,17 @@ function Home(){
                                 linkStudent.classroom === 'A' &&
                                 <div>
                                     <p>{linkStudent.name}</p>
+                                    <p>{linkStudent.phone}</p>
+                                    {
+                                        linkStudent.cars.map((item, index) =>
+                                            <div key={item.id}>
+                                                {
+                                                    <div>{item.registration}</div>
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                    
 
                                     <button onClick={() => {studentLeave(linkStudent)}}>
                                         Leave
@@ -294,7 +332,9 @@ function Home(){
 
                     {/* Class B */}
                     <div className='classB-container'>
-                        <p>Class B</p>
+                        <div onClick={showClassBStudents}>
+                            Class B
+                        </div>
 
                         <div className='classB-count-container'>
                             {
@@ -313,8 +353,6 @@ function Home(){
                                     </p>
                                 </div>
                             }
-             
-
                         </div>
 
 
@@ -350,6 +388,25 @@ function Home(){
                     </div>
 
                 </div>
+
+
+                {/* different class student on the right */}
+                <div className='students-container'>
+                    <ClassStudent 
+                    showA={showClassA} 
+                    showB={showClassB}
+                    msg={message}
+                    isHere={isHere}
+                    students={students}
+                    />
+
+                </div>
+
+
+
+
+
+
 
             </div>
 

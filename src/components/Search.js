@@ -16,7 +16,8 @@ function Search(){
     const dispatch = useDispatch();
 
     const [searchText, setSearchText] = useState(null);
-    const [searchResults, setSearchRestuls] = useState(null);
+    const [searchResultsCar, setSearchRestulsCar] = useState(null);
+    const [searchResultsStudent, setSearchRestulsStudent] = useState(null);
     const [showSearchRestuls, setShowSearchResults] = useState(false);
 
 
@@ -26,8 +27,9 @@ function Search(){
         ev.preventDefault(); // prevent page refresh after submit
 
         const res = await axios.get(RAILS_BASE_URL + `search/${searchText}`);
-        // console.log('Search-handleSubmit-res.data', res.data); // test
-        setSearchRestuls(res.data);
+        console.log('Search-handleSubmit-res.data', res.data); // test
+        setSearchRestulsCar(res.data.car);
+        setSearchRestulsStudent(res.data.student);
         setShowSearchResults(true);
 
         ev.target[0].value = ''; // clear input
@@ -45,27 +47,29 @@ function Search(){
     //  click Close button
     const handleClick = () => {
         setSearchText(null);
-        setSearchRestuls(null);
+        setSearchRestulsCar(null);
+        setSearchRestulsStudent(null);
         setShowSearchResults(false);
     }
 
-    // click Searct result text
+    // click Search Car result text
     const textClick = (item) => {
-        dispatch({type: 'selectStudent/set', payload: item.student});
+        dispatch({type: 'selectStudent/set', payload: item});
         // console.log('Search-textClick', item); // test
         setSearchText(null);
-        setSearchRestuls(null);
+        setSearchRestulsCar(null);
+        setSearchRestulsStudent(null);
         setShowSearchResults(false);
     }
 
 
     return(
         <div>
-            <h1>Search</h1>
+            
             <form onSubmit={handleSubmit}>
                 <input 
                 type="text" 
-                placeholder='Search for Registration Number'
+                placeholder='Search for Registration Number or Student Name'
                 onChange={handleInput} 
                 />
                 <br />
@@ -74,7 +78,7 @@ function Search(){
             </form>
 
             {
-                searchResults
+                (searchResultsCar || searchResultsStudent)
                 &&
                 <div>
                     <Modal
@@ -92,7 +96,7 @@ function Search(){
                         <Modal.Body>
                             <ListGroup>
                                 {
-                                    searchResults.map(rlt => 
+                                    searchResultsCar.map(rlt => 
                                         rlt.registration
                                         &&
                                         <ListGroup.Item
@@ -101,9 +105,26 @@ function Search(){
                                             variant='warning'
                                             className='center'
                                             // href={REACT_BASE_URL}
-                                            onClick={() => textClick(rlt)}
+                                            onClick={() => textClick(rlt.student)}
                                         >
                                             {rlt.registration}
+                                        </ListGroup.Item>
+                                    )
+                                }
+
+{
+                                    searchResultsStudent.map(rlt => 
+                                        rlt.name
+                                        &&
+                                        <ListGroup.Item
+                                            key={rlt.id}
+                                            action
+                                            variant='primary'
+                                            className='center'
+                                            // href={REACT_BASE_URL}
+                                            onClick={() => textClick(rlt)}
+                                        >
+                                            {rlt.name}
                                         </ListGroup.Item>
                                     )
                                 }
