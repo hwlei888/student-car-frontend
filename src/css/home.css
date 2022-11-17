@@ -1,6 +1,6 @@
 
 div{
-    /* border: red solid 1px; */
+    border: red solid 1px;
 }
 
 .home-container{
@@ -17,6 +17,19 @@ div{
     height: 300px;
     border: red solid 1px;
 }
+
+.home-container{
+    position: relative;
+    top: 67px;
+    background-color: #eee;
+    padding-top: 25px;
+}
+
+
+
+
+
+
 
 
 

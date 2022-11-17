@@ -42,7 +42,7 @@ function Home(){
             setLoading(true);
 
             const res = await axios.get(RAILS_BASE_URL + 'students.json');
-            // console.log('Home-findAllStudents', res.data); //test
+            console.log('Home-findAllStudents', res.data); //test
             // localStorage.setItem('allStudents', JSON.stringify(res.data));
 
             setLoading(false);
@@ -109,8 +109,8 @@ function Home(){
         });
 
         if(room === 'A' && status === 'leave' && (numLeaveA + leaveCountA) >= 0){
-            // console.log('numLeaveA', numLeaveA); // test
-            // console.log('leaveCountA', leaveCountA); // test
+            console.log('numLeaveA', numLeaveA); // test
+            console.log('leaveCountA', leaveCountA); // test
             return numLeaveA + leaveCountA;
         }else if(room === 'A' && status === 'here' && (numHereA - leaveCountA) >= 0){
             return numHereA - leaveCountA;
@@ -165,16 +165,25 @@ function Home(){
             [item.id]: false
         });
 
+        // find that student and use in count condition
+        let studentIsLeave;
+        students.forEach(ele => {
+            if(ele.id === item.id){
+                studentIsLeave = ele.is_leave;
+            }
+        })
+        // console.log('Home-studentIsLeave', studentIsLeave); // test
+
         let countA = leaveCountA;
         // if empty message, means not duplicate, and class A
         // means A student leave
-        if((isHere[item.id] && item.classroom === 'A') || (!item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
+        if((isHere[item.id] && item.classroom === 'A') || (!studentIsLeave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
             countA++;
         }
         setLeaveCountA(countA);
 
         let countB = leaveCountB;
-        if((isHere[item.id] && item.classroom === 'B') || (!item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'B')){
+        if((isHere[item.id] && item.classroom === 'B') || (!studentIsLeave && !message[item.id] && !isHere[item.id] && item.classroom === 'B')){
             countB++;
         }
         setLeaveCountB(countB);
@@ -200,16 +209,26 @@ function Home(){
             [item.id]: true
         });
 
+
+        // find that student and use in count condition
+        let studentIsLeave;
+        students.forEach(ele => {
+            if(ele.id === item.id){
+                studentIsLeave = ele.is_leave;
+            }
+        })
+
+
         // if isHere = false, and have message, means not duplicate, and class A
         // means A student leave
         let countA = leaveCountA;
-        if((message[item.id] && item.classroom === 'A') || (item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
+        if((message[item.id] && item.classroom === 'A') || (studentIsLeave && !message[item.id] && !isHere[item.id] && item.classroom === 'A')){
             countA--;
         }
         setLeaveCountA(countA);
 
         let countB = leaveCountB;
-        if((message[item.id] && item.classroom === 'B') || (item.is_leave && !message[item.id] && !isHere[item.id] && item.classroom === 'B')){
+        if((message[item.id] && item.classroom === 'B') || (studentIsLeave && !message[item.id] && !isHere[item.id] && item.classroom === 'B')){
             countB--;
         }
         setLeaveCountB(countB);
@@ -240,175 +259,166 @@ function Home(){
 
 
     return(
-        <div>
+        <div className='home-container'>
+            <div className='listOfCars'>
 
-            <div className='home-container'>
-                <div className='listOfCars'>
-
-                    <CarList                     
-                    msg={message}
-                    isHere={isHere}
-                    />
-
-                </div>
-
-
-                <div className='class-container'>
-
-                    {/* Class A */}
-                    <div className='classA-container'>
-                        <div onClick={showClassAStudents}>
-                            Class A
-                        </div>
-
-
-                        {/* Number of students */}
-                        <div className='classA-count-container'>
-                            {
-                                students &&
-                                <div>
-                                    <p>
-                                        No.Total: <StudentsCount item={students} room={'A'}/>
-                                    </p>
-
-                                    <p>
-                                        No.Already Left: <StudentsLeaveOrNot item={students} room={'A'} status={'leave'}/>
-                                    </p>
-
-                                    <p>
-                                        No.Still here: <StudentsLeaveOrNot item={students} room={'A'} status={'here'}/>
-                                    </p>
-                                </div>
-                            }
-             
-
-                        </div>
-
-
-
-
-                        {/* student info & leave or not button & leave message */}
-                        {
-                            students &&
-                            linkStudent &&
-                            (
-                                linkStudent.classroom === 'A' &&
-                                <div>
-                                    <p>{linkStudent.name}</p>
-                                    <p>{linkStudent.phone}</p>
-                                    {
-                                        linkStudent.cars.map((item, index) =>
-                                            <div key={item.id}>
-                                                {
-                                                    <div>{item.registration}</div>
-                                                }
-                                            </div>
-                                        )
-                                    }
-                                    
-
-                                    <button onClick={() => {studentLeave(linkStudent)}}>
-                                        Leave
-                                    </button>
-
-                                    <button onClick={() => {studentNotLeave(linkStudent)}}>
-                                        Still here
-                                    </button>
-
-
-                                    {
-                                        message[linkStudent.id]
-                                        ?
-                                        <p>{message[linkStudent.id]}</p>
-                                        :
-                                        <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
-                                    }
-                                </div>
-                            )
-                        }
-                    </div>
-
-
-
-                    {/* Class B */}
-                    <div className='classB-container'>
-                        <div onClick={showClassBStudents}>
-                            Class B
-                        </div>
-
-                        <div className='classB-count-container'>
-                            {
-                                students &&
-                                <div>
-                                    <p>
-                                        No.Total: <StudentsCount item={students} room={'B'}/>
-                                    </p>
-
-                                    <p>
-                                        No.Already Left: <StudentsLeaveOrNot item={students} room={'B'} status={'leave'}/>
-                                    </p>
-
-                                    <p>
-                                        No.Still here: <StudentsLeaveOrNot item={students} room={'B'} status={'here'}/>
-                                    </p>
-                                </div>
-                            }
-                        </div>
-
-
-
-
-                        {
-                            students &&
-                            linkStudent &&
-                            (
-                                linkStudent.classroom === 'B' &&
-                                <div>
-                                    <p>{linkStudent.name}</p>
-
-                                    <button onClick={() => {studentLeave(linkStudent)}}>
-                                        Leave
-                                    </button>
-
-                                    <button onClick={() => {studentNotLeave(linkStudent)}}>
-                                        Still here
-                                    </button>
-
-
-                                    {
-                                        message[linkStudent.id]
-                                        ?
-                                        <p>{message[linkStudent.id]}</p>
-                                        :
-                                        <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
-                                    }
-                                </div>
-                            )
-                        }
-                    </div>
-
-                </div>
-
-
-                {/* different class student on the right */}
-                <div className='students-container'>
-                    <ClassStudent 
-                    showA={showClassA} 
-                    showB={showClassB}
-                    msg={message}
-                    isHere={isHere}
-                    students={students}
-                    />
-
-                </div>
-
-
-
-
-
-
+                <CarList                     
+                msg={message}
+                isHere={isHere}
+                />
 
             </div>
+
+
+            <div className='class-container'>
+
+                {/* Class A */}
+                <div className='classA-container'>
+                    <div onClick={showClassAStudents}>
+                        Class A
+                    </div>
+
+
+                    {/* Number of students */}
+                    <div className='classA-count-container'>
+                        {
+                            students &&
+                            <div>
+                                <p>
+                                    No.Total: <StudentsCount item={students} room={'A'}/>
+                                </p>
+
+                                <p>
+                                    No.Already Left: <StudentsLeaveOrNot item={students} room={'A'} status={'leave'}/>
+                                </p>
+
+                                <p>
+                                    No.Still here: <StudentsLeaveOrNot item={students} room={'A'} status={'here'}/>
+                                </p>
+                            </div>
+                        }
+            
+
+                    </div>
+
+
+
+
+                    {/* student info & leave or not button & leave message */}
+                    {
+                        students &&
+                        linkStudent &&
+                        (
+                            linkStudent.classroom === 'A' &&
+                            <div>
+                                <p>{linkStudent.name}</p>
+                                <p>{linkStudent.phone}</p>
+                                {
+                                    linkStudent.cars.map((item, index) =>
+                                        <div key={item.id}>
+                                            {
+                                                <div>{item.registration}</div>
+                                            }
+                                        </div>
+                                    )
+                                }
+                                
+
+                                <button onClick={() => {studentLeave(linkStudent)}}>
+                                    Leave
+                                </button>
+
+                                <button onClick={() => {studentNotLeave(linkStudent)}}>
+                                    Still here
+                                </button>
+
+
+                                {
+                                    message[linkStudent.id]
+                                    ?
+                                    <p>{message[linkStudent.id]}</p>
+                                    :
+                                    <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
+                                }
+                            </div>
+                        )
+                    }
+                </div>
+
+
+
+                {/* Class B */}
+                <div className='classB-container'>
+                    <div onClick={showClassBStudents}>
+                        Class B
+                    </div>
+
+                    <div className='classB-count-container'>
+                        {
+                            students &&
+                            <div>
+                                <p>
+                                    No.Total: <StudentsCount item={students} room={'B'}/>
+                                </p>
+
+                                <p>
+                                    No.Already Left: <StudentsLeaveOrNot item={students} room={'B'} status={'leave'}/>
+                                </p>
+
+                                <p>
+                                    No.Still here: <StudentsLeaveOrNot item={students} room={'B'} status={'here'}/>
+                                </p>
+                            </div>
+                        }
+                    </div>
+
+
+
+
+                    {
+                        students &&
+                        linkStudent &&
+                        (
+                            linkStudent.classroom === 'B' &&
+                            <div>
+                                <p>{linkStudent.name}</p>
+
+                                <button onClick={() => {studentLeave(linkStudent)}}>
+                                    Leave
+                                </button>
+
+                                <button onClick={() => {studentNotLeave(linkStudent)}}>
+                                    Still here
+                                </button>
+
+
+                                {
+                                    message[linkStudent.id]
+                                    ?
+                                    <p>{message[linkStudent.id]}</p>
+                                    :
+                                    <p><LinkStudentIsLeave linkStudentId={linkStudent.id}/></p>
+                                }
+                            </div>
+                        )
+                    }
+                </div>
+
+            </div>
+
+
+            {/* different class student on the right */}
+            <div className='students-container'>
+                <ClassStudent 
+                showA={showClassA} 
+                showB={showClassB}
+                msg={message}
+                isHere={isHere}
+                students={students}
+                />
+
+            </div>
+
 
             
 

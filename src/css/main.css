@@ -1,0 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@700&display=swap');
+
+
+.logo-container{
+    position: relative;
+    top: 64px;
+    margin-left: 30px;
+}
+
+.app-name{
+    display: inline;
+    font-size: 30px;
+    font-family: 'Mali', cursive;
+
+}
+
+.app-name-pickup{
+    color: #e2aa00;
+}
+
+.app-name-students{
+    color: rgb(66, 66, 66);
+}
+
+.app-logo{
+    font-size: 15px;
+    font-family: 'Mali', cursive;
+    margin-top: -6px;
+    color:rgb(128, 128, 128);
+}
+
+.navbar-container{
+    position: absolute;
+    padding-right: 10%;
+    right: 0;
+}
+
+.navbar-container a{
+    padding-left: 30px;
+}
+
+
+
+

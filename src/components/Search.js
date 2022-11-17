@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 
+import '../css/search.css'
+
 const RAILS_BASE_URL = 'http://localhost:3000/'
 const REACT_BASE_URL = 'http://localhost:3001/'
 
@@ -66,16 +68,18 @@ function Search(){
     return(
         <div>
             
-            <form onSubmit={handleSubmit}>
-                <input 
-                type="text" 
-                placeholder='Search for Registration Number or Student Name'
-                onChange={handleInput} 
-                />
-                <br />
+            <div className='search-container'>
+                <form onSubmit={handleSubmit}>
+                    <input 
+                    type="text"
+                    placeholder='Search for Registration Number or Student Name'
+                    onChange={handleInput} 
+                    />
 
-                <button>Search</button>
-            </form>
+                    <Button variant="warning" size='sm'>Search</Button>
+                </form>
+
+            </div>
 
             {
                 (searchResultsCar || searchResultsStudent)

@@ -54,7 +54,9 @@ function CarList(props){
 
 
     return(
-        <div>
+        <div className='carlist-container'>
+
+            <p>Registration Number</p>
 
             {
                 loading
