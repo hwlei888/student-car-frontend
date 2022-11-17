@@ -5,6 +5,8 @@ import {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
+import '../css/carlist.css';
+
 const RAILS_BASE_URL = 'http://localhost:3000/'
 
 function CarList(props){
@@ -56,7 +58,8 @@ function CarList(props){
     return(
         <div className='carlist-container'>
 
-            <p>Registration Number</p>
+            <p className='carlist-title'>Registration</p>
+            <p className='carlist-title carlist-title-number'>Number</p>
 
             {
                 loading
@@ -65,19 +68,22 @@ function CarList(props){
                 :
                 cars &&
                 cars.map((item, index) => 
-                    <div key={item.id}>
+                    <div 
+                    key={item.id}
+                    className='carlist-text'
+                    >
                         {
                             props.msg[item.student.id]
                             ?
                             <p 
-                            style={{color:'green'}}
+                            style={{color:'rgb(208, 184, 112)'}}
                             onClick={() => showStudentName(item)}
                             >
                                 {item.registration}
                             </p>
                             :
                             <p 
-                            style={(item.student.is_leave && !props.isHere[item.student.id]) ? {color:'green'}:{color:'black'}}
+                            style={(item.student.is_leave && !props.isHere[item.student.id]) ? {color:'rgb(208, 184, 112)'}:{color:'black'}}
                             onClick={() => showStudentName(item)}
                             >
                                 {item.registration}

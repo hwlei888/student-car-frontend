@@ -5,6 +5,8 @@ import {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
+import '../css/classStudents.css'
+
 const RAILS_BASE_URL = 'http://localhost:3000/'
 
 function ClassStudent(props){
@@ -22,7 +24,11 @@ function ClassStudent(props){
 
 
     return(
-        <div>
+        <div className='classStudents-container'>
+
+            <p className='classStudents-title'>Students</p>
+            <p className='classStudents-title classStudents-title-name'>Name</p>
+
             {
                 !props.showA && !props.showB
                 &&
@@ -32,11 +38,11 @@ function ClassStudent(props){
             {
                 props.showA &&
                 <div>
-                <div>Class A</div>
+                <div className='classStudents-classname'>Class A</div>
                 {
                     props.students &&
                     props.students.map((item, index) => 
-                        <div key={item.id}>
+                        <div key={item.id} className='classStudents-text'>
                             {
                                 item.classroom === 'A'
                                 &&
@@ -44,14 +50,14 @@ function ClassStudent(props){
                                     props.msg[item.id]
                                     ?
                                     <p 
-                                    style={{color:'green'}}
+                                    style={{color:'rgb(208, 184, 112)'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}
                                     </p>
                                     :
                                     <p 
-                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'green'}:{color:'black'}}
+                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'rgb(208, 184, 112)'}:{color:'black'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}
@@ -69,11 +75,11 @@ function ClassStudent(props){
             {
                 props.showB &&
                 <div>
-                <div>Class B</div>
+                <div className='classStudents-classname'>Class B</div>
                 {
                     props.students &&
                     props.students.map((item, index) => 
-                        <div key={item.id}>
+                        <div key={item.id} className='classStudents-text'>
                             {
                                 item.classroom === 'B'
                                 &&
@@ -81,14 +87,14 @@ function ClassStudent(props){
                                     props.msg[item.id]
                                     ?
                                     <p 
-                                    style={{color:'green'}}
+                                    style={{color:'rgb(208, 184, 112)'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}
                                     </p>
                                     :
                                     <p 
-                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'green'}:{color:'black'}}
+                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'rgb(208, 184, 112)'}:{color:'black'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}

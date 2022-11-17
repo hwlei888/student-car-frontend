@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mali:wght@700&display=swap');
 
 
+
 .logo-container{
     position: relative;
     top: 64px;
@@ -10,7 +11,7 @@
 
 .app-name{
     display: inline;
-    font-size: 30px;
+    font-size: 35px;
     font-family: 'Mali', cursive;
 
 }
@@ -37,7 +38,11 @@
 }
 
 .navbar-container a{
-    padding-left: 30px;
+    font-family: 'Mali', cursive;
+    font-size: 1.1rem;
+    padding-left: 100px;
+    text-decoration: none;
+    color: rgb(66, 66, 66);
 }
 
 

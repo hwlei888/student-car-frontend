@@ -1,0 +1,31 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+.carlist-container{
+    text-align: center;
+}
+
+
+
+
+
+.carlist-title{
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: 'Mali', cursive;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.carlist-title-number{
+    margin-top: -20px;
+}
+
+.carlist-text{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+
+

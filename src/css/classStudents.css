@@ -1,0 +1,38 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+.classStudents-container{
+    text-align: center;
+}
+
+
+
+
+
+.classStudents-title{
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: 'Mali', cursive;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.classStudents-title-name{
+    margin-top: -20px;
+}
+
+.classStudents-classname{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.classStudents-text{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+
+
+
