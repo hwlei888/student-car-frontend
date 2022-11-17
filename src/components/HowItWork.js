@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-const RAILS_BASE_URL = 'http://localhost:3000/'
+import {RAILS_BASE_URL,REACT_BASE_URL} from './baseurl' 
 
 function HowItWork(){
 

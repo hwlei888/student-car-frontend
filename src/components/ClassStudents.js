@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import '../css/classStudents.css'
 
-const RAILS_BASE_URL = 'http://localhost:3000/'
+import {RAILS_BASE_URL,REACT_BASE_URL} from './baseurl' 
 
 function ClassStudent(props){
 

@@ -9,8 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import '../css/search.css'
 
-const RAILS_BASE_URL = 'http://localhost:3000/'
-const REACT_BASE_URL = 'http://localhost:3001/'
+import {RAILS_BASE_URL,REACT_BASE_URL} from './baseurl' 
 
 
 function Search(){

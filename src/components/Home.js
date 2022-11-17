@@ -9,7 +9,7 @@ import '../css/home.css';
 import CarList from './CarList';
 import ClassStudent from './ClassStudents';
 
-const RAILS_BASE_URL = 'http://localhost:3000/'
+import {RAILS_BASE_URL,REACT_BASE_URL} from './baseurl' 
 
 function Home(){
 
