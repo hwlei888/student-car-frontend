@@ -62,10 +62,6 @@ function Main() {
 
             </Router>
 
-            <footer>
-                &copy; Student Pick up App @ 2022
-            </footer>
-
         </div>
     )
 

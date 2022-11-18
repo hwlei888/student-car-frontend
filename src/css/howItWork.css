@@ -1,0 +1,115 @@
+
+.howitwork-container{
+    padding: 0 20% 0 20%;
+    position: relative;
+    top: 67px;
+    background-color: #f5f5f5;
+    padding-top: 25px;
+}
+
+
+.howitwork-title{
+    font-family: 'Mali', cursive;
+    font-weight: 800;
+    font-size: 35px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.howitwork-foreword{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    padding-top: 3vh;
+    margin-bottom: -5vh;
+}
+
+
+.howitwork-eachstep{
+    display: grid;
+    grid-template-columns: 25% 70%;
+    grid-column-gap: 5%;
+    margin: 10vh 0;
+    padding: 3vh;
+
+    /* height: 20rem; */
+    border-radius: 40px;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.howitwork-image{
+    margin: auto 0;
+    text-align: center;
+}
+
+.howitwork-eachstep img{
+    width: 90%;
+}
+
+.howitwork-instruction{
+    font-family: 'Open Sans', sans-serif;
+    margin: auto 0;
+    font-size: 18px;
+}
+
+.howitwork-instruction p{
+    margin: 3vh 0;
+}
+
+
+.howitwork-contact{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    padding-bottom: 15vh;
+}
+
+
+
+
+
+@media screen and (max-width: 670px){
+
+    .howitwork-eachstep{
+        display: block;
+        margin: 5vh 0;
+        padding: 3vh;
+    
+        /* height: 20rem; */
+        border-radius: 40px;
+        box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+
+    .howitwork-container{
+        top: 40px;
+    }
+
+    .howitwork-title{
+        font-size: 20px;
+    }
+    
+    .howitwork-foreword{
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+
+    .howitwork-instruction{
+        font-size: 15px;
+        margin-top: 0px;
+    }
+
+    .howitwork-contact{
+        font-size: 15px;
+        padding-bottom: 10vh;
+    }
+}
+
+
+
+
+
+
+
+
