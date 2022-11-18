@@ -1,6 +1,7 @@
 
 import React from 'react';
 import '../css/howItWork.css'
+import { Icon } from '@iconify/react';
 
 function HowItWork(){
 
@@ -165,8 +166,8 @@ function HowItWork(){
             <div className='howitwork-contact'>
                 <p>Now you are ready to use this Students Pick Up App!</p>
                 <p>For any questions, please contact:</p>
-                <p><strong>Phone:</strong> +610411456245</p>
-                <p><strong>Email:</strong> leihuawen888@gmail.com</p>
+                <p><strong><Icon icon="material-symbols:phone-in-talk" /></strong> +610411456245</p>
+                <p><strong><Icon icon="line-md:email-twotone-alt" /></strong> leihuawen888@gmail.com</p>
             </div>
 
         </div>

@@ -1,8 +1,7 @@
 
-import { useState, useEffect } from 'react';
 
-import axios from 'axios';
 import {HashRouter as Router, Link, Route, Routes} from 'react-router-dom';
+
 
 import '../css/main.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +15,7 @@ function Main() {
 
 
     return(
-        <div>
+        <div className='verytop'>
 
 
             <Search />

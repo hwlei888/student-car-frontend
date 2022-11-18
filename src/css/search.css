@@ -21,6 +21,23 @@
     /* padding: 0 15px; */
 }
 
+.totop-text{
+    color: #ffc107;
+    font-size: 30px;
+}
+
+.totop{
+    position: absolute;
+    top: 0px;
+    left: 3vw;
+    cursor: pointer;
+}
+
+.totop-text:hover{
+    color: rgb(255, 235, 174);
+}
+
+
 
 
 

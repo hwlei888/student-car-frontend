@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
+import { Link as LinkScroll } from 'react-scroll';
+import { Icon } from '@iconify/react';
 
 import '../css/search.css'
 
@@ -69,6 +71,19 @@ function Search(){
         <div>
             
             <div className='search-container'>
+                <div className='totop'>
+                    <LinkScroll
+                    to='verytop'
+                    spy={true} 
+                    smooth={true} 
+                    duration={200}
+                    className='totop-text'
+                    >
+                        <Icon icon="mdi:arrow-top-circle-outline" />
+                    </LinkScroll>
+                </div>
+
+
                 <Form onSubmit={handleSubmit}>
                     <Form.Control
                     type="text"
