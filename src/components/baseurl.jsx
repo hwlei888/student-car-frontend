@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 
 } else {
 
-    RAILS_BASE_URL = 'https://student-car-app.herokuapp.com'
+    RAILS_BASE_URL = 'https://student-car-app.herokuapp.com/'
     REACT_BASE_URL = 'https://hwlei888.github.io/student-car-frontend/#'
 
 }
