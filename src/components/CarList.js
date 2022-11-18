@@ -76,14 +76,15 @@ function CarList(props){
                             props.msg[item.student.id]
                             ?
                             <p 
-                            style={{color:'rgb(208, 184, 112)'}}
+                            // style={{color:'rgb(208, 184, 112)'}}
+                            style={{color:'rgb(198, 160, 39)'}}
                             onClick={() => showStudentName(item)}
                             >
                                 {item.registration}
                             </p>
                             :
                             <p 
-                            style={(item.student.is_leave && !props.isHere[item.student.id]) ? {color:'rgb(208, 184, 112)'}:{color:'black'}}
+                            style={(item.student.is_leave && !props.isHere[item.student.id]) ? {color:'rgb(198, 160, 39)'}:{color:'black'}}
                             onClick={() => showStudentName(item)}
                             >
                                 {item.registration}

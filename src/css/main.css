@@ -40,9 +40,16 @@
 .navbar-container a{
     font-family: 'Mali', cursive;
     font-size: 1.1rem;
-    padding-left: 100px;
+    margin-left: 100px;
     text-decoration: none;
     color: rgb(66, 66, 66);
+    cursor: pointer;
+    padding: 5px 25px;
+}
+
+.navbar-container a:hover{
+    color: #ffc107;
+    background-color:  rgba(66, 66, 66, 0.8);
 }
 
 

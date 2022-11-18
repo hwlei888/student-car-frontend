@@ -292,20 +292,20 @@ function Home(){
                             {
                                 students &&
                                 <div className='class-count-text'>
-                                    <p>
+                                    <div>
                                         No.Total: 
                                         <p className='class-count-number'><StudentsCount item={students} room={'A'}/></p>
-                                    </p>
+                                    </div>
 
-                                    <p>
+                                    <div>
                                         No.Already Left: 
                                         <p className='class-count-number'><StudentsLeaveOrNot item={students} room={'A'} status={'leave'}/></p>
-                                    </p>
+                                    </div>
 
-                                    <p>
+                                    <div>
                                         No.Still here: 
                                         <p className='class-count-number'><StudentsLeaveOrNot item={students} room={'A'} status={'here'}/></p>
-                                    </p>
+                                    </div>
                                 </div>
                             }
                         </div>
@@ -340,9 +340,9 @@ function Home(){
                                 linkStudent.classroom === 'A' &&
                                 <div className='class-student-info'>
                                     <p className='class-student-name'>{linkStudent.name}</p>
-                                    <p>Phone Number: 
+                                    <div>Phone Number: 
                                         <p>{linkStudent.phone}</p>
-                                    </p>
+                                    </div>
                                     
                                     <div>Vehicle could take:
                                     {
@@ -398,20 +398,20 @@ function Home(){
                             {
                                 students &&
                                 <div className='class-count-text'>
-                                    <p>
+                                    <div>
                                         No.Total: 
                                         <p className='class-count-number'><StudentsCount item={students} room={'B'}/></p>
-                                    </p>
+                                    </div>
 
-                                    <p>
+                                    <div>
                                         No.Already Left: 
                                         <p className='class-count-number'><StudentsLeaveOrNot item={students} room={'B'} status={'leave'}/></p>
-                                    </p>
+                                    </div>
 
-                                    <p>
+                                    <div>
                                         No.Still here: 
                                         <p className='class-count-number'><StudentsLeaveOrNot item={students} room={'B'} status={'here'}/></p>
-                                    </p>
+                                    </div>
                                 </div>
                             }
                         </div>

@@ -31,6 +31,11 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: 17px;
+    cursor: pointer;
+}
+
+.classStudents-text:hover{
+    background-color:#ffc10633;
 }
 
 

@@ -50,14 +50,14 @@ function ClassStudent(props){
                                     props.msg[item.id]
                                     ?
                                     <p 
-                                    style={{color:'rgb(208, 184, 112)'}}
+                                    style={{color:'rgb(198, 160, 39)'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}
                                     </p>
                                     :
                                     <p 
-                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'rgb(208, 184, 112)'}:{color:'black'}}
+                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'rgb(198, 160, 39)'}:{color:'black'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}
@@ -87,14 +87,14 @@ function ClassStudent(props){
                                     props.msg[item.id]
                                     ?
                                     <p 
-                                    style={{color:'rgb(208, 184, 112)'}}
+                                    style={{color:'rgb(198, 160, 39)'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}
                                     </p>
                                     :
                                     <p 
-                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'rgb(208, 184, 112)'}:{color:'black'}}
+                                    style={(item.is_leave && !props.isHere[item.id]) ? {color:'rgb(198, 160, 39)'}:{color:'black'}}
                                     onClick={() => showStudentName(item)}
                                     >
                                         {item.name}

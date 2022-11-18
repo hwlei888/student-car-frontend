@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 
@@ -24,7 +25,7 @@ function Search(){
 
 
     const handleSubmit = async (ev) => {
-        // console.log('Search-handleSubmit-searchText', searchText); // test
+        console.log('Search-handleSubmit-searchText', searchText); // test
         ev.preventDefault(); // prevent page refresh after submit
 
         const res = await axios.get(RAILS_BASE_URL + `search/${searchText}`);
@@ -68,15 +69,16 @@ function Search(){
         <div>
             
             <div className='search-container'>
-                <form onSubmit={handleSubmit}>
-                    <input 
+                <Form onSubmit={handleSubmit}>
+                    <Form.Control
                     type="text"
+                    size='sm'
                     placeholder='Search for Registration Number or Student Name'
                     onChange={handleInput} 
                     />
 
-                    <Button variant="warning" size='sm'>Search</Button>
-                </form>
+                    <Button type="submit" variant="warning" size='sm'>Search</Button>
+                </Form>
 
             </div>
 
@@ -115,7 +117,7 @@ function Search(){
                                     )
                                 }
 
-{
+                                {
                                     searchResultsStudent.map(rlt => 
                                         rlt.name
                                         &&

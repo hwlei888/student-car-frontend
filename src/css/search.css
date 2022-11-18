@@ -10,9 +10,15 @@
     z-index: 1;
 }
 
-input{
+.search-container form{
+    display: flex;
     width: 45%;
-    margin-right: 1%;
+    margin: 0 auto;
+}
+
+.search-container button{
+    margin-left: 1.5%;
+    /* padding: 0 15px; */
 }
 
 

@@ -25,6 +25,12 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: 17px;
+    cursor: pointer;
+}
+
+.carlist-text:hover{
+    /* background-color:  rgba(66, 66, 66, 0.19); */
+    background-color:#ffc10633;
 }
 
 
