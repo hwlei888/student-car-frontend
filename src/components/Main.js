@@ -34,12 +34,12 @@ function Main() {
 
                 
 
-                <nav className='navbar-container'>
+                <div className='navbar-container'>
                     <Link to='/'>Home</Link>
                     <Link to='/how-it-works'>How It Works</Link>
                     {/* <Link to='/classroom/A'>Class A</Link>
                     <Link to='/classroom/B'>Class B</Link> */}
-                </nav>
+                </div>
 
                 
 

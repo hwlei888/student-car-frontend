@@ -18,7 +18,8 @@ div{
 .class-container{
     position: sticky;
     top: 80px;
-    height: 700px;
+    /* height: 700px; */
+    height: 800px;
 }
 
 .classAB-container{
@@ -103,6 +104,151 @@ div{
 .student-leave-button{
     width: 100px;
 }
+
+
+
+@media screen and (max-width: 1050px){
+    .class-student-info p {
+        margin-bottom: 3px;
+    }
+
+    .class-student-info button {
+        font-size: 1.05rem;
+        padding: 1px 2px;
+        margin-top: 10px;
+        margin: 4px;
+      }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 840px){
+
+.class-container-count-info{
+    position: relative;
+    height: 18rem;
+    padding: 0 4px;
+}
+
+
+.classAB-container{
+    height: 22rem;
+    margin-bottom: 2rem;
+}
+
+.class-title button{
+    font-size: 20px;
+    padding: 1px 30px;
+    margin-top: 8px;
+}
+
+
+.class-container-count-info{
+    height: 10rem;
+}
+
+
+.class-count-text{
+    font-size: 0.9rem;
+}
+
+.class-count-number{
+    font-size: 1.3rem;
+}
+
+.class-student-info{
+    font-size: 0.9rem;
+    width: 33vw;
+}
+
+.class-student-info p{
+    margin-bottom: 8px;
+}
+
+.class-student-name{
+    font-size: 1.2rem;
+}
+
+
+
+.class-student-info button{
+    font-size: 0.9rem;
+    padding: 1px 15px;
+    margin: 5px;
+}
+
+.class-student-leave-info{
+    position: absolute;
+    font-size: 1.3rem;
+    top: 150%;
+    width: 100%;
+    margin: 0 auto;
+
+    /* margin: 30% 2%; */
+
+}
+
+.student-leave-button{
+    width: 100px;
+}
+
+
+}
+
+
+
+
+@media screen and (max-width: 670px){
+    .home-container{
+        top: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 420px){
+    
+    .class-container{
+        position: relative;
+        top: 0px;
+    }
+
+    .classAB-container{
+        height: 24rem;
+    }
+    
+    .class-student-info button{
+        font-size: 0.9rem;
+        padding: 1px 15px;
+        margin: 5px;
+    }
+    
+    .class-student-leave-info{
+        font-size: 1.1rem;
+        top: 185%; 
+    }
+
+}
+
+
+
+
 
 
 

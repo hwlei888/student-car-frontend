@@ -39,5 +39,25 @@
 }
 
 
+@media screen and (max-width: 680px){
+
+    .classStudents-title{
+        font-size: 100%;
+    }
+
+}
+
+
+@media screen and (max-width: 480px){
+
+    .classStudents-title{
+        font-size: 80%;
+    }
+
+}
+
+
+
+
 
 

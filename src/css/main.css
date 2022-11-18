@@ -6,7 +6,7 @@
 .logo-container{
     position: relative;
     top: 64px;
-    margin-left: 30px;
+    margin-left: 65px;
 }
 
 .app-name{
@@ -33,14 +33,14 @@
 
 .navbar-container{
     position: absolute;
-    padding-right: 10%;
+    padding-right: 2vw;
     right: 0;
 }
 
 .navbar-container a{
     font-family: 'Mali', cursive;
     font-size: 1.1rem;
-    margin-left: 100px;
+    margin-left: 1vw;
     text-decoration: none;
     color: rgb(66, 66, 66);
     cursor: pointer;
@@ -51,6 +51,55 @@
     color: #ffc107;
     background-color:  rgba(66, 66, 66, 0.8);
 }
+
+
+
+
+
+
+
+
+@media screen and (max-width: 670px){
+
+    .logo-container {
+        position: relative;
+        top: 46px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .navbar-container{
+        position: relative;
+        top: 4vh;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .navbar-container a {
+        font-size: 100%;
+        cursor: pointer;
+        padding: 0 3%;
+      }
+
+    .app-name {
+        font-size: 25px;
+    }
+
+    .app-logo {
+        font-size: 12px;
+        margin-top: -5px;
+    }
+
+
+}
+
+
+
+
+
+
+
+
 
 
 

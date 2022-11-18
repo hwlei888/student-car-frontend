@@ -11,7 +11,6 @@
 
 
 .carlist-title{
-    /* font-family: 'Open Sans', sans-serif; */
     font-family: 'Mali', cursive;
     font-weight: 800;
     font-size: 20px;
@@ -32,6 +31,26 @@
     /* background-color:  rgba(66, 66, 66, 0.19); */
     background-color:#ffc10633;
 }
+
+
+
+@media screen and (max-width: 680px){
+
+    .carlist-title{
+        font-size: 100%;
+    }
+
+}
+
+
+@media screen and (max-width: 560px){
+
+    .carlist-title{
+        font-size: 80%;
+    }
+
+}
+
 
 
 
