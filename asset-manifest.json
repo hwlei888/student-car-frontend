@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/student-car-frontend/static/css/main.f7531ed1.css",
-    "main.js": "/student-car-frontend/static/js/main.d48b8ddf.js",
+    "main.css": "/student-car-frontend/static/css/main.4894ac1c.css",
+    "main.js": "/student-car-frontend/static/js/main.d50255b2.js",
     "index.html": "/student-car-frontend/index.html",
-    "main.f7531ed1.css.map": "/student-car-frontend/static/css/main.f7531ed1.css.map",
-    "main.d48b8ddf.js.map": "/student-car-frontend/static/js/main.d48b8ddf.js.map"
+    "main.4894ac1c.css.map": "/student-car-frontend/static/css/main.4894ac1c.css.map",
+    "main.d50255b2.js.map": "/student-car-frontend/static/js/main.d50255b2.js.map"
   },
   "entrypoints": [
-    "static/css/main.f7531ed1.css",
-    "static/js/main.d48b8ddf.js"
+    "static/css/main.4894ac1c.css",
+    "static/js/main.d50255b2.js"
   ]
 }
