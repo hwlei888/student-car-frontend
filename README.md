@@ -1,71 +1,46 @@
-# Getting Started with Create React App
+# Welcome to Student Pick Up App!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### A Student Pick Up platform using Reat Hooks and PostgreSQL 
 
-## Available Scripts
+## App Links:
+- [Backend Heroku](https://student-car-app.herokuapp.com)
+- [Frontend GitHub Pages](https://hwlei888.github.io/student-car-frontend)
 
-In the project directory, you can run:
+## Overview:
 
-### `npm start`
+- Student Pick Up App is a web application that can help students leave the classroom at the time school end time, by let them know that their pick-up car is next in the carpool lane.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Users are able to search the car registration number or student name to find the associated child, and associated student name and brief inforamtion will show in the related class box.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Users can also click the car registration number on the left and student name on the right to find the desired student.
 
-### `npm test`
+- Once the name is shown the user should be able to mark that student has left the class.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- After pressing Leave Button, a proper message will be shown to indicate that the child has already left.
 
-### `npm run build`
+- User can also press 'Still here' Button to cancel Leave status if some issues happen and student comes back.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- For each class, a counter should be shown how many students have left and how many are left in the class.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- A student can be associated with multiple vehicles.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+It is a full-stack web project that uses axios HTTP requests.
 
-### `npm run eject`
+## Tech Stack:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Front-end: React.js, Hooks, Redux, Axios, CSS, Bootstrap
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Back-End: Ruby on Rails, PostgreSQL, ActiveRecord
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## TODO Lists:
 
-## Learn More
+1. Build out admin panel on the back end
+2. Build login sign up system
+3. Dark Mode
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# student-car-frontend
